@@ -1,0 +1,7 @@
+<div class="multi-group">
+	{{#each model.answerOptions as |answerOption|}}
+		{{survey-response-answer-multi model=answerOption values=answerValue}}
+	{{/each}}
+</div>
+
+{{yield}}

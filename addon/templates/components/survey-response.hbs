@@ -1,1 +1,15 @@
 {{yield}}
+
+<h1>{{survey.name}}</h1>
+<h3>for engagement between {{engagement.coach}} and {{engagement.coachee}}</h3>
+
+<div class="questions-container">
+	{{#each questions as |question|}}
+		{{survey-response-question model=question registerAction='registerQuestionComponent'}}
+	{{/each}}
+</div>
+
+<div class='temp-test-component'>
+	<p>-- FOR TESTING ONLY, REMOVE WHEN FINISHED --</p>
+	<button {{action 'testSuccess'}}>Success</button> <button {{action 'testFailure'}}>Fail</button>
+</div>
