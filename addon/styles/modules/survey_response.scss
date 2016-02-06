@@ -1,0 +1,26 @@
+.survey_response {
+  background: white;
+  box-shadow: 0px 1px 6px -1px #c1ccd8;
+
+  .survey_response-title {
+    color: #5f6b76;
+    width: 100%;
+    padding: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eaf0f6;
+  }
+  .survey_response-details {
+    padding: 24px;
+  }
+  .survey_response-container {
+    padding: 24px;
+  }
+}
+
+.survey_question-prompt {
+  font-weight: 500;
+  font-size: 15px;
+}

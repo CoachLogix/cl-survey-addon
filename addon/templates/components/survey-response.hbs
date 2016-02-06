@@ -1,9 +1,14 @@
 {{yield}}
 
-<h1>{{survey.name}}</h1>
-<h3>for engagement between {{engagement.coach}} and {{engagement.coachee}}</h3>
+<h1 class="survey_response-title">{{survey.name}}</h1>
 
-<div class="questions-container">
+<div class="survey_response-details">
+	<div class="list_item">
+		<span class="list_item-title">For a coaching engagement with {{engagement.coachee.name}}</span>
+	</div>
+</div>
+
+<div class="survey_response-container">
 	{{#each questions as |question|}}
 		{{survey-response-question model=question registerAction='registerQuestionComponent'}}
 	{{/each}}

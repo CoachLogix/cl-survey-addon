@@ -14,11 +14,11 @@ export default Ember.Component.extend({
           answerValue = component.get('answerValue');
 
       if (answerType == 'text') {
-        return answerValue;	
+        return answerValue;
       }
       else if (answerType == 'single') {
         if (answerValue) {
-          return answerValue.get('id');	
+          return answerValue.get('id');
         }
         return null;
       }
