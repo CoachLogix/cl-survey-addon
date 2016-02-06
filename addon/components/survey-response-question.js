@@ -7,6 +7,8 @@ export default Ember.Component.extend({
   }),
   layout: layout,
 
+  classNames: ["survey_response-question"],
+
   answerValue: function() {
     let component = this.get('answerComponents.firstObject');
     if (component) {
