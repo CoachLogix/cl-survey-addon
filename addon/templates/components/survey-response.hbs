@@ -1,17 +1,22 @@
 {{yield}}
 
-<h1>{{survey.name}}</h1>
-<h3>for engagement between {{engagement.coach.name}} and {{engagement.coachee.name}}</h3>
+<h1 class="survey_response-title">{{survey.name}}</h1>
 
-<div class="questions-container">
+<div class="survey_response-details">
+	<div class="list_item">
+		<img class="list_item-icon" src="{{engagement.coachee.thumbImg}}">
+		<span class="list_item-title">Engagement for {{engagement.coachee.name}}</span>
+		<span class="list_item-subtitle">Coached by {{engagement.coach.name}}</span>
+	</div>
+</div>
+
+<div class="survey_response-container">
 	{{#each questions as |question|}}
 		{{survey-response-question model=question registerAction='registerQuestionComponent'}}
 	{{/each}}
 </div>
 
-<div class="submit-container">
-	<button {{action 'submit'}}>Submit Responses</button>
-</div>
+<button class="survey_response-submit"{{action 'submit'}}>Send Response</button>
 
 {{!--<div class='temp-test-component'>
 	<p>-- FOR TESTING ONLY, REMOVE WHEN FINISHED --</p>

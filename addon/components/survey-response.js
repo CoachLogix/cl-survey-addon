@@ -4,6 +4,8 @@ import layout from '../templates/components/survey-response';
 export default Ember.Component.extend({
   layout: layout,
 
+  classNames: ['survey_response'],
+
   ajax: Ember.inject.service(),
   ajaxPending: false,
 

@@ -1,0 +1,20 @@
+.list_item {
+  .list_item-title {
+    font-size: 16px;
+  }
+  .list_item-subtitle {
+    font-size: 13px;
+    line-height: 1;
+    color: #9ba9b4;
+    display: block;
+  }
+  .list_item-icon {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background: #4c5761;
+    border-radius: 50%;
+    float: left;
+    margin-right: 14px;
+  }
+}
