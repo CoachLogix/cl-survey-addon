@@ -4,7 +4,9 @@
 
 <div class="survey_response-details">
 	<div class="list_item">
-		<img class="list_item-icon" src="{{engagement.coachee.thumbImg}}">
+		{{#if engagement.coachee.thumbImg}}
+			<img class="list_item-icon" src="{{engagement.coachee.thumbImg}}">
+		{{/if}}
 		<span class="list_item-title">Engagement for {{engagement.coachee.name}}</span>
 		<span class="list_item-subtitle">Coached by {{engagement.coach.name}}</span>
 	</div>
