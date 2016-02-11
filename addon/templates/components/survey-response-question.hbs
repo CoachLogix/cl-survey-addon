@@ -1,0 +1,19 @@
+<span class="survey_question-prompt">
+	{{model.value}}
+</span>
+
+<div class="survey_question-answer-container">
+	{{#if model.isText}}
+		{{survey-response-answer-text registerAction='registerAnswerComponent'}}
+	{{/if}}
+
+	{{#if model.isSingleChoice}}
+		{{survey-response-answer-single-group model=model registerAction='registerAnswerComponent'}}
+	{{/if}}
+
+	{{#if model.isMultiChoice}}
+		{{survey-response-answer-multi-group model=model registerAction='registerAnswerComponent'}}
+	{{/if}}
+</div>
+
+{{yield}}

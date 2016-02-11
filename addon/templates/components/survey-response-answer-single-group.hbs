@@ -1,0 +1,7 @@
+<div class="single-group">
+	{{#each model.answerOptions as |answerOption|}}
+		{{survey-response-answer-single model=answerOption value=answerValue}}
+	{{/each}}
+</div>
+
+{{yield}}
