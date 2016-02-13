@@ -15,16 +15,16 @@ export default Ember.Component.extend({
       let answerType = this.get('answerType'),
           answerValue = component.get('answerValue');
 
-      if (answerType == 'text') {
+      if (answerType === 'text') {
         return answerValue;
       }
-      else if (answerType == 'single') {
+      else if (answerType === 'single') {
         if (answerValue) {
           return answerValue.get('id');
         }
         return null;
       }
-      else if (answerType == 'multi') {
+      else if (answerType === 'multi') {
         if (answerValue) {
           return answerValue.mapBy('id');
         }
