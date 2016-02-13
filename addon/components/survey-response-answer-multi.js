@@ -4,7 +4,7 @@ import layout from '../templates/components/survey-response-answer-multi';
 export default Ember.Component.extend({
   layout: layout,
   optionChecked: Ember.computed('values', {
-    get(key) {
+    get() {
       let values = this.get('values'),
           model = this.get('model');
 
