@@ -1,5 +1,5 @@
-import Ember from 'ember';
-import layout from '../templates/components/survey-response';
+import Ember from "ember";
+import layout from "../templates/components/survey-response";
 
 export default Ember.Component.extend({
   layout: layout,
@@ -19,8 +19,8 @@ export default Ember.Component.extend({
   }),
 
   gatherResponses: function() {
-    let questionsAnswersArray = Ember.A([]),
-        questionComponents = this.get('questionComponents');
+    const questionComponents = this.get('questionComponents');
+    let questionsAnswersArray = Ember.A();
 
     questionComponents.forEach(function(questionComponent) {
       let questionAnswerHash = {};
@@ -48,13 +48,13 @@ export default Ember.Component.extend({
     submit: function() {
       // gather responses, build payload
       let ajax = this.get('ajax'),
-          component = this,
-          endpoint = this.get('apiEndpoint'),
-          responses = this.gatherResponses(),
-          payload = {
-            disposition: 'respond',
-            responses: responses
-          };
+        component = this,
+        endpoint = this.get('apiEndpoint'),
+        responses = this.gatherResponses(),
+        payload = {
+          disposition: 'respond',
+          responses: responses
+        };
 
       component.set('ajaxPending', true);
 
@@ -62,18 +62,18 @@ export default Ember.Component.extend({
       let request = ajax.request(endpoint, {
         method: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({pendingAction:payload})
+        data: JSON.stringify({pendingAction: payload})
       });
 
       // catch success/failure and bubble actions appropriately
       let onSuccess = function() {
-            component.set('ajaxPending', false);
-            component.sendAction('successAction');
-          },
-          onError = function() {
-            component.set('ajaxPending', false);
-            component.sendAction('errorAction');
-          };
+          component.set('ajaxPending', false);
+          component.sendAction('successAction');
+        },
+        onError = function() {
+          component.set('ajaxPending', false);
+          component.sendAction('errorAction');
+        };
 
       request.then(onSuccess, onError);
     },
