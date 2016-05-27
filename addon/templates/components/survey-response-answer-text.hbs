@@ -1,3 +1,8 @@
-{{input value=answerValue placeholder=''}}
+{{paper-input
+class="survey_response-text_input"
+label="Your response"
+type="text"
+value=answerValue
+onChange=(action (mut answerValue))}}
 
 {{yield}}

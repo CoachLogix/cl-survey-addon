@@ -1,3 +1,5 @@
-<label>{{input type="checkbox" checked=optionChecked}} {{model.value}}</label>
+{{#paper-checkbox value=optionChecked onChange=(action (mut optionChecked))}}
+  {{model.value}}
+{{/paper-checkbox}}
 
 {{yield}}
