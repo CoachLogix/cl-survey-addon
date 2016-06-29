@@ -1,5 +1,5 @@
-import Ember from 'ember';
-import layout from '../templates/components/survey-response-answer-single-group';
+import Ember from "ember";
+import layout from "../templates/components/survey-response-answer-single-group";
 
 export default Ember.Component.extend({
   answerType: 'single',
@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   layout: layout,
 
   init: function() {
-  	this._super();
-  	this.sendAction('registerAction', this);
+    this._super();
+    this.sendAction('registerAction', this);
   }
 });

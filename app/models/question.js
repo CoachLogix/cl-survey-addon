@@ -1,8 +1,8 @@
-import Model from './model';
 import DS from 'ember-data';
 const { attr, belongsTo, hasMany } = DS;
 
-export default Model.extend({
+export default DS.Model.extend({
+  permissions: attr('object'),
   answerOptions: hasMany('answerOption', {
     async: true,
     inverse: null
@@ -13,21 +13,21 @@ export default Model.extend({
     inverse: null
   }),
   order: attr('number'),
-  type: attr('string'),
+  type: attr('number'),
 
   isText: function() {
-    return (this.get('type') === '2');
+    return (this.get('type') === 2);
   }.property('type'),
 
   notText: function() {
-    return (this.get('type') !== '2');
+    return (this.get('type') !== 2);
   }.property('type'),
 
   isMultiChoice: function() {
-    return (this.get('type') === '1');
+    return (this.get('type') === 1);
   }.property('type'),
 
   isSingleChoice: function() {
-    return (this.get('type') === '0');
+    return (this.get('type') === 0);
   }.property('type')
 });

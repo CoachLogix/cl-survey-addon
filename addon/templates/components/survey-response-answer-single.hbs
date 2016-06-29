@@ -1,7 +1,11 @@
-{{#radio-button
-    value=model
-    groupValue=value}}
+{{#if group}}
+  {{#group.paper-radio value=model}}
     {{model.value}}
-{{/radio-button}}
+  {{/group.paper-radio}}
+{{else}}
+  {{#paper-radio value=model}}
+    {{model.value}}
+  {{/paper-radio}}
+{{/if}}
 
 {{yield}}
