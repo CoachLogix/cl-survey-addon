@@ -1,5 +1,5 @@
-import Ember from 'ember';
-import layout from '../templates/components/survey-response-question';
+import Ember from "ember";
+import layout from "../templates/components/survey-response-question";
 
 export default Ember.Component.extend({
   answerComponents: Ember.computed(function() {
@@ -13,7 +13,7 @@ export default Ember.Component.extend({
     let component = this.get('answerComponents.firstObject');
     if (component) {
       let answerType = this.get('answerType'),
-          answerValue = component.get('answerValue');
+        answerValue = component.get('answerValue');
 
       if (answerType === 'text') {
         return answerValue;
@@ -28,7 +28,7 @@ export default Ember.Component.extend({
         if (answerValue) {
           return answerValue.mapBy('id');
         }
-       	return [];
+        return [];
       }
     }
     return null;

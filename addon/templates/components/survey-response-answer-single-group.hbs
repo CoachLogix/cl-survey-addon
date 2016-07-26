@@ -1,7 +1,9 @@
 <div class="single-group">
-	{{#each model.answerOptions as |answerOption|}}
-		{{survey-response-answer-single model=answerOption value=answerValue}}
-	{{/each}}
+  {{#paper-radio-group groupValue=answerValue onChange=(action (mut answerValue)) as |group|}}
+    {{#each model.answerOptions as |answerOption|}}
+      {{survey-response-answer-single group=group model=answerOption}}
+    {{/each}}
+  {{/paper-radio-group}}
 </div>
 
 {{yield}}
