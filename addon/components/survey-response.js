@@ -13,7 +13,10 @@ export default Ember.Component.extend({
   engagement: Ember.computed.alias('assignment.engagement'),
   surveyResource: Ember.computed.alias('assignment.resource'),
   survey: Ember.computed.alias('surveyResource.survey'),
-  questions: Ember.computed.alias('survey.questions'),
+  rawQuestions: Ember.computed.alias('survey.questions'),
+
+  questionSorting: ['order:asc'],
+  questions: Ember.computed.sort('rawQuestions', 'questionSorting'),
   questionComponents: Ember.computed(function() {
     return Ember.A([]);
   }),
