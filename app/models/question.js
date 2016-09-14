@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 const { attr, belongsTo, hasMany } = DS;
+const { computed } = Ember;
 
 export default DS.Model.extend({
   permissions: attr('object'),
@@ -14,6 +15,8 @@ export default DS.Model.extend({
   }),
   order: attr('number'),
   type: attr('number'),
+
+  questionNumber: computed.alias('order'),
 
   isText: function() {
     return (this.get('type') === 2);
