@@ -1,29 +1,30 @@
-import Ember from "ember";
-import layout from "../templates/components/survey-response";
+import Ember from 'ember';
+import layout from '../templates/components/survey-response';
+const { Component, computed, inject, A } = Ember;
 
-export default Ember.Component.extend({
-  layout: layout,
+export default Component.extend({
+  layout,
 
   classNames: ['survey_response'],
 
-  ajax: Ember.inject.service(),
+  ajax: inject.service(),
   ajaxPending: false,
 
-  assignment: Ember.computed.alias('model.actionObject'),
-  engagement: Ember.computed.alias('assignment.engagement'),
-  surveyResource: Ember.computed.alias('assignment.resource'),
-  survey: Ember.computed.alias('surveyResource.survey'),
-  rawQuestions: Ember.computed.alias('survey.questions'),
+  assignment: computed.alias('model.actionObject'),
+  engagement: computed.alias('assignment.engagement'),
+  surveyResource: computed.alias('assignment.resource'),
+  survey: computed.alias('surveyResource.survey'),
+  rawQuestions: computed.alias('survey.questions'),
 
   questionSorting: ['order:asc'],
-  questions: Ember.computed.sort('rawQuestions', 'questionSorting'),
-  questionComponents: Ember.computed(function() {
-    return Ember.A([]);
+  questions: computed.sort('rawQuestions', 'questionSorting'),
+  questionComponents: computed(function() {
+    return A([]);
   }),
 
-  gatherResponses: function() {
+  gatherResponses() {
     const questionComponents = this.get('questionComponents');
-    let questionsAnswersArray = Ember.A();
+    let questionsAnswersArray = A();
 
     questionComponents.forEach(function(questionComponent) {
       let questionAnswerHash = {};
@@ -38,53 +39,52 @@ export default Ember.Component.extend({
     return questionsAnswersArray;
   },
 
-  apiEndpoint: function() {
+  apiEndpoint: computed('model', function() {
     let modelId = this.get('model.id');
     return `/api/pendingActions/${modelId}/set_disposition`;
-  }.property('model'),
+  }),
 
   actions: {
-    registerQuestionComponent: function(component) {
+    registerQuestionComponent(component) {
       this.get('questionComponents').pushObject(component);
     },
 
-    submit: function() {
+    submit() {
       // gather responses, build payload
-      let ajax = this.get('ajax'),
-        component = this,
-        endpoint = this.get('apiEndpoint'),
-        responses = this.gatherResponses(),
-        payload = {
-          disposition: 'respond',
-          responses: responses
-        };
+      let ajax = this.get('ajax');
+      let endpoint = this.get('apiEndpoint');
+      let responses = this.gatherResponses();
+      let payload = {
+        disposition: 'respond',
+        responses: responses
+      };
 
-      component.set('ajaxPending', true);
+      this.set('ajaxPending', true);
 
       // post to pendingActions/set_disposition endpoint
       let request = ajax.request(endpoint, {
         method: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({pendingAction: payload})
+        data: JSON.stringify({ pendingAction: payload })
       });
 
       // catch success/failure and bubble actions appropriately
-      let onSuccess = function() {
-          component.set('ajaxPending', false);
-          component.sendAction('successAction');
-        },
-        onError = function() {
-          component.set('ajaxPending', false);
-          component.sendAction('errorAction');
-        };
+      let onSuccess = () => {
+        this.set('ajaxPending', false);
+        this.sendAction('successAction');
+      };
+      let onError = () => {
+        this.set('ajaxPending', false);
+        this.sendAction('errorAction');
+      };
 
       request.then(onSuccess, onError);
     },
 
-    testSuccess: function() {
+    testSuccess() {
       this.sendAction('successAction');
     },
-    testFailure: function() {
+    testFailure() {
       this.sendAction('errorAction');
     }
   }

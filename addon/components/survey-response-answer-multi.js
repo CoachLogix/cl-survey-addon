@@ -1,9 +1,10 @@
-import Ember from "ember";
-import layout from "../templates/components/survey-response-answer-multi";
+import Ember from 'ember';
+import layout from '../templates/components/survey-response-answer-multi';
+const { Component, computed } = Ember;
 
-export default Ember.Component.extend({
-  layout: layout,
-  optionChecked: Ember.computed('values', {
+export default Component.extend({
+  layout,
+  optionChecked: computed('values', {
     get() {
       let values = this.get('values'),
         model = this.get('model');

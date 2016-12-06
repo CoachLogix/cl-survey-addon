@@ -1,13 +1,14 @@
-import Ember from "ember";
-import layout from "../templates/components/survey-response-answer-text";
+import Ember from 'ember';
+import layout from '../templates/components/survey-response-answer-text';
+const { Component } = Ember;
 
-export default Ember.Component.extend({
+export default Component.extend({
   answerType: 'text',
   answerValue: '',
-  layout: layout,
+  layout,
 
-  init: function() {
-    this._super();
+  init() {
+    this._super(...arguments);
     this.sendAction('registerAction', this);
   }
 });
