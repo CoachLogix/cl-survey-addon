@@ -1,15 +1,16 @@
-import Ember from "ember";
-import layout from "../templates/components/survey-response-question";
+import Ember from 'ember';
+import layout from '../templates/components/survey-response-question';
+const { Component, computed, A } = Ember;
 
-export default Ember.Component.extend({
-  answerComponents: Ember.computed(function() {
-    return Ember.A([]);
+export default Component.extend({
+  answerComponents: computed(function() {
+    return A([]);
   }),
-  layout: layout,
+  layout,
 
-  classNames: ["survey_response-question"],
+  classNames: ['survey_response-question'],
 
-  answerValue: function() {
+  answerValue: computed('answerComponents', 'answerComponents.@each.answerValue', function() {
     let component = this.get('answerComponents.firstObject');
     if (component) {
       let answerType = this.get('answerType'),
@@ -32,23 +33,24 @@ export default Ember.Component.extend({
       }
     }
     return null;
-  }.property('answerComponents', 'answerComponents.@each.answerValue'),
+  }),
 
-  answerType: function() {
+
+  answerType: computed('answerComponents', 'answerComponents.@each.answerType', function() {
     let component = this.get('answerComponents.firstObject');
     if (component) {
       return component.get('answerType');
     }
     return null;
-  }.property('answerComponents', 'answerComponents.@each.answerType'),
+  }),
 
-  init: function() {
-    this._super();
+  init() {
+    this._super(...arguments);
     this.sendAction('registerAction', this);
   },
 
   actions: {
-    registerAnswerComponent: function(component) {
+    registerAnswerComponent(component) {
       this.get('answerComponents').pushObject(component);
     }
   }

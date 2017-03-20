@@ -1,6 +1,7 @@
-import Ember from "ember";
-import layout from "../templates/components/survey-response-answer-single";
+import Ember from 'ember';
+import layout from '../templates/components/survey-response-answer-single';
+const { Component } = Ember;
 
-export default Ember.Component.extend({
-  layout: layout
+export default Component.extend({
+  layout
 });
