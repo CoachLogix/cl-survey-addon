@@ -11,7 +11,6 @@ export default Component.extend({
   ajaxPending: false,
 
   assignment: computed.alias('model.actionObject'),
-  engagement: computed.alias('assignment.engagement'),
   surveyResource: computed.alias('assignment.resource'),
   survey: computed.alias('surveyResource.survey'),
   rawQuestions: computed.alias('survey.questions'),
