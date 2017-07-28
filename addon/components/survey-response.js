@@ -22,22 +22,16 @@ export default Component.extend({
     return A([]);
   }),
 
-  gatherResponses() {
-    const questionComponents = this.get('questionComponents');
-    let questionsAnswersArray = A();
+  responses: computed.map('questionComponents.@each.answerValue', function(component) {
+    let answerType = component.get('answerType');
 
-    questionComponents.forEach(function(questionComponent) {
-      let questionAnswerHash = {};
-
-      questionAnswerHash.id = questionComponent.get('model.id');
-      questionAnswerHash.answer = questionComponent.get('answerValue');
-      questionAnswerHash.answerType = questionComponent.get('answerType');
-
-      questionsAnswersArray.pushObject(questionAnswerHash);
-    });
-
-    return questionsAnswersArray;
-  },
+    return {
+      id: component.get('model.id'),
+      answer: component.get('answerValue'),
+      answerOptions: component.get('model.answerOptions').toArray(),
+      answerType,
+    };
+  }),
 
   apiEndpoint: computed('model', function() {
     let modelId = this.get('model.id');
@@ -53,10 +47,27 @@ export default Component.extend({
       // gather responses, build payload
       let ajax = this.get('ajax');
       let endpoint = this.get('apiEndpoint');
-      let responses = this.gatherResponses();
+      let responses = this.get('responses');
+
+      for (let response of responses) {
+        if (response.answerType === 'multi') {
+          continue;
+        }
+
+        // HACK Some questions don't have possible answers, it would be a shame to require mandatory answers for them
+        if (response.answerType === 'single' && response.answerOptions.length === 0) {
+          continue;
+        }
+
+        if (!response.answer) {
+          alert('Please fill all required fields.');
+          return;
+        }
+      }
+
       let payload = {
         disposition: 'respond',
-        responses: responses
+        responses
       };
 
       this.set('ajaxPending', true);
