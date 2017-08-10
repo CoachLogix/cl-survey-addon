@@ -28,7 +28,7 @@
 
   {{#paper-card-content}}
     <div layout="row" layout-align="end center">
-      {{#paper-button raised=true primary=true onClick=(action 'submit')}}
+      {{#paper-button raised=true primary=true disabled=ajaxPending onClick=(action 'submit')}}
         Send response
       {{/paper-button}}
     </div>
