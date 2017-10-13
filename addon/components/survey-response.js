@@ -83,9 +83,9 @@ export default Component.extend({
         this.set('ajaxPending', false);
         this.sendAction('successAction');
       };
-      let onError = () => {
+      let onError = (error) => {
         this.set('ajaxPending', false);
-        this.sendAction('errorAction');
+        this.sendAction('errorAction', error && error.errors && error.errors[0]);
       };
 
       request.then(onSuccess, onError);
